@@ -14,32 +14,15 @@ def roll_result(number_of_dice, number_of_sides_per_die)
   @number_of_dice = number_of_dice 
   @number_of_sides_per_die = number_of_sides_per_die
 
-  if number_of_dice > 1 
-    @demonstrative_pronoun = "these"
-  else
-    @demonstrative_pronoun = "this"
+  @rolls = []
+
+  number_of_dice.times do
+    die = rand(1..number_of_sides_per_die)
+
+    @rolls.push(die)
   end
 
-  @roll_string = " "
-
-  dice_total = 0
-
-  for num_dice in 1..number_of_dice do  
-    
-      dice_roll = rand(1..number_of_sides_per_die) 
-       @roll_string += " #{dice_roll} "
-
-      dice_total += dice_roll
-
-  end
-
-  roll_message = " "
-
-  if number_of_dice > 1    
-      @roll_message = "Total of the dice rolls : #{dice_total}"
-  end
-
-    erb(:roll_result)
+  erb(:rolls)
 
 end
 
@@ -48,15 +31,6 @@ end
 get("/") do
   erb(:elephant)
 end
-
-get("/zebra") do
-  "We must add a route for each path we want to support"
-end
-
-get("/giraffe") do
-  "Hopefully this shows up without having to restart the server 🤞🏾"
-end
-
 
 #-----------------------------------------------
 
